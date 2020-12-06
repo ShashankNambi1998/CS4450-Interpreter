@@ -113,3 +113,68 @@ class Parser:
 
         while not self.checkToken(TokenType.EOF):
             self.statement()
+   def comparison(self):
+       print("COMPARISON")
+
+       self.expression()
+       #One comparison operator and another expression
+       if self.isComparisonOperator():
+           self.nextToken()
+           self.expression()
+       else:
+           self.abort("Expected comparison operator at: " + self.curToken.text)
+
+           #0 or more comparison operators/expressions
+           while self.isComparisonOperator():
+               self.nextToken()
+               self.expression()
+
+   def isComparisonOperator(self):
+           return self.checkToken(TokenType.GT) or self.checkToken(TokenType.GTEQ) or self.checkToken(TokenType.LT) or self.checkToken(TokenType.LTEQ) or self.checkToken(TokenType.EQEQ) or self.checkToken(TokenType.NOTEQ)
+
+   def expression(self):
+       print("EXPRESSION")
+
+       self.term()
+
+       while self.checkToken(TokenType.PLUS) or self.checkToken(TokenType.MINUS):
+               self.nextToken()
+               self.term()
+
+   def term(self):
+           print("TERM")
+
+           self.unary()
+           # Can have 0 or more *// and expressions.
+           while self.checkToken(TokenType.ASTERISK) or self.checkToken(TokenType.SLASH):
+               self.nextToken()
+               self.unary()
+
+
+   # unary ::= ["+" | "-"] primary
+   def unary(self):
+       print("UNARY")
+
+       # Optional unary +/-
+       if self.checkToken(TokenType.PLUS) or self.checkToken(TokenType.MINUS):
+           self.nextToken()        
+       self.primary()
+
+
+   # primary ::= number | ident
+
+   def primary(self):
+       print("PRIMARY (" + self.curToken.text + ")")
+
+       if self.checkToken(TokenType.NUMBER): 
+           self.nextToken()
+       elif self.checkToken(TokenType.IDENT):
+           # Ensure the variable already exists.
+           if self.curToken.text not in self.symbols:
+               self.abort("Referencing variable before assignment: " + self.curToken.text)
+           self.nextToken()
+       else:
+           # Error!
+           self.abort("Unexpected token at " + self.curToken.text)
+
+
