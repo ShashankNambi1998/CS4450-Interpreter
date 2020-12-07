@@ -11,7 +11,6 @@ def main():
         print(token.kind)
         token = lexer.getToken()
     # Initialize lexer and parser
-    lexer = Lexer(input)
     parser = Parser(lexer)
 
     parser.program() # Start parser.
