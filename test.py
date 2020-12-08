@@ -15,7 +15,11 @@ def main():
     while token.kind != TokenType.EOF:
         print(token.kind)
         token = lexer.getToken()
+    
+    parser = Parser(lexer)
+    parser.program()
 
     print("Lexing Complete")
+    print("Parsing Complete")
 
 main()

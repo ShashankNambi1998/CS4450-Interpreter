@@ -121,6 +121,7 @@ class Lexer:
             startPosition = self.curPos
             while self.lookNext().isalnum() or self.lookNext() == '_':
                 self.nextChar()
+
             tokenText = self.source[startPosition : self.curPos + 1]
             keyword = Token.checkIfKeyword(tokenText)
             if keyword == None:
@@ -163,11 +164,12 @@ class Token:
     def __init__(self, tokenText, tokenKind):
         self.text = tokenText   # The token's actual text. Used for identifiers, strings, and numbers.
         self.kind = tokenKind   # The TokenType that this token is classified as.
+
     @staticmethod
     def checkIfKeyword(tokenText):
-        for type in TokenType:
-            if type.name == tokenText and type.value >= 100 and type.value < 200:
-                return type
+        for kind in TokenType:
+            if kind.name == tokenText.upper() and kind.value >= 100 and kind.value < 200:
+                return kind
         return None
 
 # TokenType is our enum for all the types of tokens.
