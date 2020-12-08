@@ -16,8 +16,6 @@ class Lexer:
 
         if self.curChar == '+':
             token = Token(self.curChar, TokenType.PLUS)
-        elif self.curChar == '-':
-            token = Token(self.curChar, TokenType.MINUS)
         elif self.curChar == '*':
             token = Token(self.curChar, TokenType.ASTERISK)
         elif self.curChar == '/':
@@ -28,10 +26,35 @@ class Lexer:
             token = Token(self.curChar, TokenType.NEWLINE)
         elif self.curChar == '\0':
             token = Token(self.curChar, TokenType.EOF)
+        elif self.curChar == '(':
+            token = Token(self.curChar, TokenType.OPARN)
+        elif self.curChar == ')':
+            token = Token(self.curChar, TokenType.CPARN)
+        elif self.curChar == ',':
+            token = Token(self.curChar, TokenType.COMMA)
+
+        elif self.curChar == '%':
+            #Logic to differentiate between - and -=
+            if self.lookNext() == '=':
+                lastCharacter = self.curChar
+                self.nextChar()
+                token = Token(lastCharacter + self.curChar, TokenType.REMAINEQ)
+            else:
+                token = Token(self.curChar, TokenType.REMAINDER)
+
+        elif self.curChar == '-':
+            #Logic to differentiate between - and -=
+            if self.lookNext() == '=':
+                lastCharacter = self.curChar
+                self.nextChar()
+                token = Token(lastCharacter + self.curChar, TokenType.MINEQ)
+            else:
+                token = Token(self.curChar, TokenType.MINUS)
+
         elif self.curChar == '=':
             # logic in place to differentiate between = and ==
             if self.lookNext() == '=':
-                lastCharacter = self.curChar()
+                lastCharacter = self.curChar
                 self.nextChar()
                 token = Token(lastCharacter + self.curChar, TokenType.EQEQ)
             else:
@@ -165,14 +188,20 @@ class TokenType(enum.Enum):
     EQ = 201  
     PLUS = 202
     MINUS = 203
-    ASTERISK = 204
-    SLASH = 205
-    EQEQ = 206
-    NOTEQ = 207
-    LT = 208
-    LTEQ = 209
-    GT = 210
-    GTEQ = 211
+    MINEQ = 204
+    ASTERISK = 205
+    SLASH = 206
+    EQEQ = 207
+    NOTEQ = 208
+    LT = 209
+    LTEQ = 210
+    GT = 211
+    GTEQ = 212
+    OPARN = 213
+    CPARN = 214
+    COMMA = 215
+    REMAINDER = 216
+    REMAINEQ = 217
     # Assignment
     EQL = 301
     PEQL = 302
