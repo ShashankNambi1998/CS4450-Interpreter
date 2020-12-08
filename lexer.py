@@ -11,6 +11,7 @@ class Lexer:
     def getToken(self):
         self.skipWhiteSpace()
         self.ignoreComments()
+
         token = None
 
         if self.curChar == '+':
@@ -21,6 +22,8 @@ class Lexer:
             token = Token(self.curChar, TokenType.ASTERISK)
         elif self.curChar == '/':
             token = Token(self.curChar, TokenType.SLASH)
+        elif self.curChar == ':':
+            token = Token(self.curChar, TokenType.COLON)
         elif self.curChar == '\n':
             token = Token(self.curChar, TokenType.NEWLINE)
         elif self.curChar == '\0':
@@ -93,14 +96,14 @@ class Lexer:
 
         elif self.curChar.isalpha():
             startPosition = self.curPos
-            while self.lookNext().isalnum():
+            while self.lookNext().isalnum() or self.lookNext() == '_':
                 self.nextChar()
             tokenText = self.source[startPosition : self.curPos + 1]
             keyword = Token.checkIfKeyword(tokenText)
             if keyword == None:
                 token = Token(tokenText, TokenType.IDENT)
             else:
-                token = Token(tokenText, TokenType.IDENT)
+                token = Token(tokenText, keyword)
         else:
             self.abort("Unknown token: " + self.curChar)
 
@@ -151,6 +154,7 @@ class TokenType(enum.Enum):
     NUMBER = 1
     IDENT = 2
     STRING = 3
+    COLON = 4
     # Keywords.
     PRINT = 101
     IF = 102

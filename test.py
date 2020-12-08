@@ -3,18 +3,19 @@ from parser import *
 import sys
 
 def main():
-    test = "+ - 123 9.8654 * /"
-    lexer = Lexer(test)
+    print("Interpreter")
+    if len(sys.argv) != 2:
+        sys.exit("Error: Compiler needs source file as argument.")
+    with open (sys.argv[1], 'r') as inputFile:
+        input = inputFile.read()
+
+    lexer = Lexer(input)
     token = lexer.getToken()
 
     while token.kind != TokenType.EOF:
         print(token.kind)
         token = lexer.getToken()
-    # Initialize lexer and parser
-    parser = Parser(lexer)
 
-    parser.program() # Start parser.
-    print("Parsing completed.")
-
+    print("Lexing Complete")
 
 main()
