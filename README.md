@@ -2,4 +2,4 @@
 
 Lexer complete, to run, enter in command line:
 
-python3 test.py interpretertest.py
+python3 main.py interpretertest.py
