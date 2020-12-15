@@ -125,7 +125,7 @@ class Lexer:
             tokenText = self.source[startPosition : self.curPos + 1]
             keyword = Token.checkIfKeyword(tokenText)
             if keyword == None:
-                token = Token(tokenText, TokenType.VARIABLE)
+                token = Token(tokenText, TokenType.IDENT)
             else:
                 token = Token(tokenText, keyword)
         else:
@@ -177,7 +177,7 @@ class TokenType(enum.Enum):
     EOF = -1
     NEWLINE = 0
     NUMBER = 1
-    VARIABLE = 2
+    IDENT = 2
     STRING = 3
     COLON = 4
     # Keywords.
