@@ -2,9 +2,13 @@
 Interpreters Project Group
 
 Shashank Nambi
+
 Isaac Shee
+
 Jack Marak
+
 Stephen Miller
+
 Arsalan Ali
 
 All necessary files are included in repository, to run, enter in command line:
