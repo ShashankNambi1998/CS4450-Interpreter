@@ -5,7 +5,7 @@ Group Members:
 
 Shashank Nambi
 Isaac Shee
-*ack Marak
+Jack Marak
 Stephen Miller
 Arsalan Ali
 
