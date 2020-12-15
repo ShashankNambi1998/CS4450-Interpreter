@@ -21,5 +21,6 @@ def main():
 
     print("Lexing Complete")
     print("Parsing Complete")
+    print("File has been compiled")
 
 main()
