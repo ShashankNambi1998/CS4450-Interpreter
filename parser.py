@@ -70,8 +70,8 @@ class Parser:
 
             self.match(TokenType.ENDWHILE)
 
-        elif self.checkToken(TokenType.LABEL):
-            print("STATEMENT-LABEL")
+        elif self.checkToken(TokenType.IDENT):
+            print("STATEMENT-IDENT")
             self.nextToken()
             self.match(TokenType.IDENT)
 

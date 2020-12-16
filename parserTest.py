@@ -1,25 +1,13 @@
-from lexer import *
-from parser import *
-import sys
+print("How many fibonacci numbers do you want?")
+INPUT nums
+PRINT ""
 
-
-def main():
-    test = "+ - 123 9.8654 * /"
-    lexer = Lexer(test)
-    token = lexer.getToken()
-
-
-    while token.kind != TokenType.EOF:
-        print(token.kind)
-        token = lexer.getToken()
-    # Initialize lexer and parser	
-    parser = Parser(lexer)	
-
-    parser.program() # Start parser.	
-    print("Parsing completed.")	
-
-
-    print("Lexing Complete")
-
-
-main()
+LET a = 0
+LET b = 1
+WHILE nums > 0 REPEAT
+    PRINT a
+    LET c = a + b
+    LET a = b
+    LET b = c
+    LET nums = nums - 1
+ENDWHILE
