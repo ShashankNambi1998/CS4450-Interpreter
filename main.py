@@ -1,5 +1,5 @@
 from lexer import *
-from parser import *
+from Parser import *
 import sys
 
 def main():
